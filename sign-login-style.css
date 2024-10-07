@@ -4,14 +4,14 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 33px;
+    margin: 50px;
     background-color: #f4f4f4;
     background-size: cover;
 }
 
 .signup-container, .login-container {
     background-color: white;
-    padding: 50px;
+    padding: 5px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     width: 270px;
