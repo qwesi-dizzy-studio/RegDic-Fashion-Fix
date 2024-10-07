@@ -11,7 +11,7 @@ body {
 
 .signup-container, .login-container {
     background-color: white;
-    padding: 5px;
+    padding: 70px;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     width: 270px;
