@@ -1,10 +1,9 @@
-body {
+b {
     font-family: Arial, sans-serif;
     diplay: flex;
     justify-content: center;
     align-items: center;
-    he
-    ight: 100vh;
+    height: 100vh;
     margin: 33px;
     background-color: #f4f4f4;
     background-size: cover;
