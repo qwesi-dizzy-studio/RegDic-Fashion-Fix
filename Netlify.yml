@@ -1,0 +1,6 @@
+# Build settings
+build:
+  command: "bundle install && Jekyll build"
+  functions:
+    directory: functions
+  publish: public
