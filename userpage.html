@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothes Seller</title>
+    <link rel="stylesheet" href="userpage.css">
+</head>
+<body  background="background.png">
+    <header align="center">
+        <img class="logo" src="logo2.png">
+     </header>
+    <div class="container mt-5" align="center">
+        <h1 class="text-center">Available Items</h1>
+        <section align="center">
+            <br></br>
+        <div class="row">
+            <!-- Item 1 -->
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="stylish shirt.webp" class="card-img-top" alt="Shirt">
+                    <div class="card-body">
+                        <h5 class="card-title">Stylish Shirt</h5>
+                        <p class="card-text">Price: <text1>GHS 30</text1></p>
+                        
+
+<!-- Trigger Button -->
+<button id="buyButton">I want to buy</button>
+
+<!-- Dropdown Form (Initially Hidden) -->
+<div id="orderForm" style="display:none;">
+    <h3>Order Form</h3>
+    <label for="buyerName">Name:</label>
+    <input type="text" id="buyerName" required><br>
+
+    <label for="location">Location:</label>
+    <input type="text" id="location" required><br>
+
+    <label for="telephone">Telephone Number:</label>
+    <input type="text" id="telephone" required><br>
+
+    <label for="paymentMethod">Payment Method:</label>
+    <select id="paymentMethod" required>
+        <option value="">Select</option>
+        <option value="MTN Mobile Money">MTN Mobile Money</option>
+        <option value="Vodafone Cash">Vodafone Cash</option>
+        <option value="Airtel/Tigo Cash">Airtel/Tigo Cash</option>
+    </select><br>
+
+    <div id="accountDetails" style="display:none;">
+        <label for="accountInfo">Account Details:</label>
+        <input type="text" id="accountInfo" required><br>
+    </div>
+
+    <button id="confirmOrder">Confirm</button>
+</div>
+
+<!-- Order Details Placeholder (For Example) -->
+<div id="orderDetails"></div>
+
+<script>
+$(document).ready(function() {
+    $('#buyButton').click(function() {
+        $('#orderForm').toggle();
+    });
+
+    $('#paymentMethod').change(function() {
+        if ($(this).val()) {
+            $('#accountDetails').show();
+        } else {
+            $('#accountDetails').hide();
+        }
+    });
+
+    $('#confirmOrder').click(function() {
+        const buyerName = $('#buyerName').val();
+        const location = $('#location').val();
+        const telephone = $('#telephone').val();
+        const paymentMethod = $('#paymentMethod').val();
+        const accountInfo = $('#accountInfo').val();
+
+        const itemName = 'Sample Item'; // Replace with actual item name
+        const itemImage = 'sample-image.jpg'; // Replace with actual item image
+        const itemPrice = '10.00'; // Replace with actual item price
+
+        const orderDetails = `
+            <div>
+                <h4>Order Details</h4>
+                <p>Buyer Name: ${buyerName}</p>
+                <p>Location: ${location}</p>
+                <p>Telephone: ${telephone}</p>
+                <p>Payment Method: ${paymentMethod}</p>
+                <p>Account Details: ${accountInfo}</p>
+                <p>Item Name: ${itemName}</p>
+                <p>Item Price: ${itemPrice}</p>
+            </div>
+        `;
+        
+        $('#orderDetails').append(orderDetails);
+
+        // AJAX code can go here if needed
+    });
+});
+</script>
+
+              
+                     <br></br>   </section>
+                    </div>
+                </div>
+            </div>
+            <!-- Repeat for more items -->
+        </div>
+    </div>
+</body>
+    <scrit src="script.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </html>
