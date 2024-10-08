@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 50px;
+        }
+        .dashboard-container {
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+        .dashboard-header {
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+        }
+        .dashboard-header h1 {
+            margin: 0;
+        }
+        .admin-sidebar {
+            background-color: #f8f9fa;
+            padding: 15px;
+        }
+        .admin-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .admin-sidebar ul li {
+            margin-bottom: 15px;
+        }
+        .admin-sidebar ul li a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .admin-sidebar ul li a:hover {
+            text-decoration: underline;
+        }
+        .content-area {
+            padding: 15px;
+        }
+        .content-area h2 {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+    <div class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+    </div>
+    <div class="row mt-4">
+        <!-- Sidebar for navigation -->
+        <div class="col-md-3 admin-sidebar">
+            <h4>Admin Menu</h4>
+            <ul>
+                <li><a href="#" onclick="showSection('manageItems')">Manage Items</a></li>
+                <li><a href="#" onclick="showSection('viewOrders')">View Orders</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-md-9 content-area">
+            <!-- Manage Items Section -->
+            <div id="manageItems" style="display:none;">
+                <h2>Manage Items</h2>
+                <button class="btn btn-success mb-3" onclick="showAddItemForm()">Add New Item</button>
+
+                <!-- Add Item Form (hidden initially) -->
+                <div id="addItemForm" style="display:none;">
+                    <form id="addItem" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="itemName">Item Name</label>
+                            <input type="text" id="itemName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemPrice">Item Price</label>
+                            <input type="number" id="itemPrice" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="itemImage">Item Image</label>
+                            <input type="file" id="itemImage" class="form-control-file" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Item</button>
+                    </form>
+                </div>
+
+                <!-- Existing Items List -->
+                <h4>Existing Items</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="itemsTable">
+                        <!-- Dynamic rows will be injected here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- View Orders Section -->
+            <div id="viewOrders" style="display:none;">
+                <h2>Pending Orders</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Buyer Name</th>
+                            <th>Item</th>
+                            <th>Location</th>
+                            <th>Phone</th>
+                            <th>Payment Method</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTable">
+                        <!-- Dynamic rows will be injected here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showSection(section) {
+        document.getElementById('manageItems').style.display = 'none';
+        document.getElementById('viewOrders').style.display = 'none';
+        document.getElementById(section).style.display = 'block';
+    }
+
+    function showAddItemForm() {
+        document.getElementById('addItemForm').style.display = 'block';
+    }
+
+    // Simulating dynamic content (for demo purposes)
+    document.addEventListener('DOMContentLoaded', function () {
+        // Adding sample data for items
+        const itemsTable = document.getElementById('itemsTable');
+        itemsTable.innerHTML = `
+            <tr>
+                <td>Stylish Shirt</td>
+                <td>GHS30</td>
+                <td><img src="shirt.jpg" alt="Stylish Shirt" width="50"></td>
+                <td>
+                    <button class="btn btn-warning">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Casual Jeans</td>
+                <td>GHS45</td>
+                <td><img src="jeans.jpg" alt="Casual Jeans" width="50"></td>
+                <td>
+                    <button class="btn btn-warning">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        `;
+
+        // Adding sample data for orders
+        const ordersTable = document.getElementById('ordersTable');
+        ordersTable.innerHTML = `
+            <tr>
+                <td>John Doe</td>
+                <td>Stylish Shirt</td>
+                <td>123 Street, City</td>
+                <td>0123456789</td>
+                <td>MTN Mobile Money</td>
+                <td>
+                    <button class="btn btn-success" onclick="acceptPayment('0123456789')">Accept Payment</button>
+                </td>
+            </tr>
+        `;
+    });
+
+    function acceptPayment(phone) {
+        alert(`Payment request sent to ${phone}.`);
+    }
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
