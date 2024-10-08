@@ -24,7 +24,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         const username = document.getElementById('username').value;
 
         // Fetch user data from localStorage (simulate backend)
-        const users = JSON.parse(localStorage.getItem('user_db')) || [];
+        const users = JSON.parse(localStorage.getItem('users')) || [];
         const user = users.find(u => u.username === username && u.password === password && u.role === 'user');
 
         if (user) {
