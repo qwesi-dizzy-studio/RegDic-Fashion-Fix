@@ -24,11 +24,11 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         const username = document.getElementById('username').value;
 
         // Fetch user data from localStorage (simulate backend)
-        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const users = JSON.parse(localStorage.getItem('user_db')) || [];
         const user = users.find(u => u.username === username && u.password === password && u.role === 'user');
 
         if (user) {
-            window.location.href = 'user_dashboard.html'; // Redirect to user dashboard
+            window.location.href = 'userpage.html'; // Redirect to user dashboard
         } else {
             document.getElementById('loginMessage').textContent = 'Invalid login credentials!';
         }
