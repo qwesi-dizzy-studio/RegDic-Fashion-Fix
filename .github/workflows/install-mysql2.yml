@@ -1,0 +1,20 @@
+
+
+```
+name: Install mysql2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install-mysql2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install mysql2
+        run: |
+          npm install mysql2
+```
