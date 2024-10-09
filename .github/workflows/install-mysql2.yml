@@ -1,6 +1,4 @@
 
-
-```
 name: Install mysql2
 
 on:
@@ -17,4 +15,4 @@ jobs:
       - name: Install mysql2
         run: |
           npm install mysql2
-```
+
