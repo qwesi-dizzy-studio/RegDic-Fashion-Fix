@@ -14,21 +14,22 @@ const dbConfig = {
 const db = mysql.createPool(dbConfig);
 
 app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-  const query = 'SELECT * FROM users WHERE username = ? AND password = ?';
-  const [rows] = await db.execute(query, [username, password]);
-  if (rows.length > 0) {
-    res.json({ success: true });
-  } else {
-    res.json({ success: false });
+  const { role, username, password } = req.body;
+  if (role === 'user') {
+    const [rows] = await db.execute(`SELECT * FROM users WHERE username = ? AND password = ? AND role = 'user';`, [username, password]);
+    if (rows.length > 0) {
+      res.json({ success: true, redirect: 'userpage.html' });
+    } else {
+      res.json({ success: false, message: 'Invalid login credentials!' });
+    }
+  } else if (role === 'admin') {
+    const adminCode = 'pRGnS611';
+    if (password === adminCode) {
+      res.json({ success: true, redirect: 'admin_dashboard.html' });
+    } else {
+      res.json({ success: false, message: 'Invalid admin code!' });
+    }
   }
-});
-
-app.post('/signup', async (req, res) => {
-  const { username, email, password } = req.body;
-  const query = 'INSERT INTO users (username, password) VALUES (?, ?)';
-  await db.execute(query, [username, password]);
-  res.json({ success: true });
 });
 
 app.listen(3000, () => {
