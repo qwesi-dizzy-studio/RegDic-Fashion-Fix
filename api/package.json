@@ -2,14 +2,12 @@
   "name": "my-api",
   "version": "1.0.0",
   "scripts": {
+    "build": "netlify build"
     "start": "node index.js"
   },
   "dependencies": {
     "express": "^4.17.1",
     "mysql2": "^2.3.3"
   }
-  "scripts": {
-  "build": "netlify build"
-  "start": "netlify dev"
-  }
+
 }
