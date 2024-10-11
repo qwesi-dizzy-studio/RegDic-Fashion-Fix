@@ -6,7 +6,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   const username = role === 'user' ? document.getElementById('username').value : '';
 
   // Send login data to Netlify function
-  const response = await fetch('/.netlify/functions/login', {
+  const response = await fetch('/.netlify/functions/login.js', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
