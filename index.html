@@ -9,19 +9,24 @@
 <body background="Background.png">
     <header align="center">
         <img class="logo" src="logo1.png">
-     </header>
-     <br></br>
+    </header>
+    <br></br>
     <div class="login-container">
         <h2>Login</h2>
         <form id="loginForm">
+            <!-- Username Input -->
             <div class="input-group" id="usernameGroup">
                 <label for="username">Username</label>
                 <input type="text" id="username" required>
             </div>
+
+            <!-- Password Input -->
             <div class="input-group">
                 <label for="password" id="passwordLabel">Password</label>
                 <input type="password" id="password" required>
             </div>
+
+            <!-- Role Selection (User/Admin) -->
             <div class="input-group">
                 <label for="role">Login as:</label>
                 <select id="role" required>
@@ -29,12 +34,23 @@
                     <option value="admin">Admin</option>
                 </select>
             </div>
+
+            <!-- Admin Unique Code Input (Initially Hidden) -->
+            <div class="input-group" id="adminCodeGroup" style="display:none;">
+                <label for="adminCode">Admin Unique Code</label>
+                <input type="password" id="adminCode">
+            </div>
+
+            <!-- Submit Button -->
             <button type="submit">Login</button>
         </form>
+
+        <!-- Feedback Message -->
         <p id="loginMessage"></p>
-        <p class="login-link">
-            I`m a New Customer. <a href="signup.html">Sign Up Here</a>
     </div>
-    <script src="login.js"></script>
+
+    <!-- JavaScript File -->
+    <script src="index.js"></script>
 </body>
 </html>
+
