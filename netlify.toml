@@ -1,5 +1,5 @@
 [build]
  functions = "netlify/functions"
  [build.environment]
-  DATABASE_URL= "mysql://dizzy:@TwenTy@21@localhost:port/user_db"
+  DATABASE_URL= "http://localhost/phpmyadmin/index.php?route=/database/structure&db=user_db"
     
