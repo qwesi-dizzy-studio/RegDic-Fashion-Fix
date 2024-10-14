@@ -1,2 +1,5 @@
 [build]
  functions = "netlify/functions"
+ [build.environment]
+  DATABASE_URL= "mysql://dizzy:@TwenTy@21@localhost:port/user_db"
+    
