@@ -24,9 +24,9 @@ exports.handler = async function(event, context) {
 
   // Connect to the database (update the credentials)
   const connection = mysql.createConnection({
-    host: 'http://localhost/phpmyadmin/index.php?route=/database/structure&db=user_db', // e.g., 'localhost' or AWS RDS instance
-    user: 'users',
-    password: '',
+    host: 'localhost', // e.g., 'localhost' or AWS RDS instance
+    user: 'dizzy',
+    password: '@TwenTy@21',
     database: 'user_db'
   });
 
