@@ -24,10 +24,10 @@ exports.handler = async function(event, context) {
 
   // Connect to the database (update the credentials)
   const connection = mysql.createConnection({
-    host: 'localhost', // e.g., 'localhost' or AWS RDS instance
-    user: 'dizzy',
-    password: '@TwenTy@21',
-    database: 'user_db'
+    host: process.env.DB_HOST, // e.g., 'localhost' or AWS RDS instance
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: proces.env.DB_NAME
   });
 
   connection.connect();
