@@ -1,6 +1,6 @@
-const mysql = require('mysql');
+const { Client } = require('pg');
 
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   // Only allow POST requests
   if (event.httpMethod !== 'POST') {
     return {
@@ -22,54 +22,49 @@ exports.handler = async function(event, context) {
     };
   }
 
-  // Connect to the database (update the credentials)
-  const connection = mysql.createConnection({
-    host: process.env.DB_HOST, // e.g., 'localhost' or AWS RDS instance
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: proces.env.DB_NAME
+  // Connect to the PostgreSQL database (update the credentials with your Render DB details)
+  const client = new Client({
+    host: process.env.RENDER_DB_HOST, // Your Render PostgreSQL host
+    user: process.env.RENDER_DB_USER, // Your PostgreSQL user
+    password: process.env.RENDER_DB_PASSWORD, // Your PostgreSQL password
+    database: process.env.RENDER_DB_NAME, // Your PostgreSQL database name
+    port: 5432, // Default PostgreSQL port
   });
 
-  connection.connect();
+  try {
+    // Connect to the database
+    await client.connect();
 
-  // Check if the username already exists
-  const checkUserQuery = 'SELECT * FROM users WHERE username = ?';
-  return new Promise((resolve, reject) => {
-    connection.query(checkUserQuery, [username], (err, results) => {
-      if (err) {
-        connection.end();
-        return resolve({
-          statusCode: 500,
-          body: JSON.stringify({ error: 'Database query error' }),
-        });
-      }
+    // Check if the username already exists
+    const checkUserQuery = 'SELECT * FROM users WHERE username = $1';
+    const userResult = await client.query(checkUserQuery, [username]);
 
-      if (results.length > 0) {
-        connection.end();
-        return resolve({
-          statusCode: 400,
-          body: JSON.stringify({ error: 'Username already exists' }),
-        });
-      }
+    if (userResult.rows.length > 0) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: 'Username already exists' }),
+      };
+    }
 
-      // Insert the new user into the database
-      const insertUserQuery = 'INSERT INTO users (username, password) VALUES (?, ?)';
-      const hashedPassword = password; // Use bcrypt for hashing in a real-world app
+    // Insert the new user into the database
+    const insertUserQuery = 'INSERT INTO users (username, password) VALUES ($1, $2)';
+    const hashedPassword = password; // Use bcrypt for hashing in a real-world app
+    await client.query(insertUserQuery, [username, hashedPassword]);
 
-      connection.query(insertUserQuery, [username, hashedPassword], (err) => {
-        connection.end();
-        if (err) {
-          return resolve({
-            statusCode: 500,
-            body: JSON.stringify({ error: 'Failed to create user' }),
-          });
-        }
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: 'User created successfully' }),
+    };
 
-        return resolve({
-          statusCode: 200,
-          body: JSON.stringify({ message: 'User created successfully' }),
-        });
-      });
-    });
-  });
+  } catch (err) {
+    console.error('Database error:', err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Database query error' }),
+    };
+  } finally {
+    // Ensure the database connection is closed
+    await client.end();
+  }
 };
+  
