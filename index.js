@@ -25,7 +25,9 @@ roleSelect.addEventListener('change', () => {
         adminCodeGroup.style.display = 'block';
     } else {
         // Show username and password inputs
+        usernameGroup.style.display = 'block';
         usernameInput.style.display = 'block';
+        passwordLabel.style.display = 'block';
         passwordInput.style.display = 'block';
         adminCodeGroup.style.display = 'none';
     }
