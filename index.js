@@ -17,7 +17,7 @@ const adminUniqueCode = 'pRGnS611';
 
 roleSelect.addEventListener('change', () => {
     if (roleSelect.value === 'admin') {
-        // Hide username and password inputs
+        // Hide username and password inputs completely
         usernameInput.style.display = 'none';
         passwordInput.style.display = 'none';
         adminCodeGroup.style.display = 'block';
@@ -67,4 +67,5 @@ function displayMessage(message, color) {
     loginMessage.style.color = color;
     setTimeout(() => loginMessage.textContent = '', 3000); // Clear message after 3 seconds
 }
+
 
