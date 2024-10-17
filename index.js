@@ -18,7 +18,9 @@ const adminUniqueCode = 'pRGnS611';
 roleSelect.addEventListener('change', () => {
     if (roleSelect.value === 'admin') {
         // Hide username and password inputs completely
+        usernameGroup.style.display = 'none';
         usernameInput.style.display = 'none';
+        passwordLabel.style.display = 'none';
         passwordInput.style.display = 'none';
         adminCodeGroup.style.display = 'block';
     } else {
