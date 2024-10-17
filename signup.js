@@ -5,7 +5,7 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
     const password = document.getElementById('password').value;
 
     if (username && password) {
-        fetch('/.netlify/functions/signup', {
+        fetch('/.netlify/functions/node', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
