@@ -1,56 +1,69 @@
 // Get necessary elements
 const roleSelect = document.getElementById('role');
 const adminCodeGroup = document.getElementById('adminCodeGroup');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const loginForm = document.getElementById('loginForm');
+const loginMessage = document.getElementById('loginMessage');
 
-// Show/Hide the admin unique code field based on the role selection
-roleSelect.addEventListener('change', function() {
+// List of valid user credentials
+const validUsers = [
+    { username: 'user1', password: 'password1' },
+    { username: 'user2', password: 'password2' }
+];
+
+// Admin credentials
+const adminUniqueCode = 'pRGnS611';
+
+roleSelect.addEventListener('change', () => {
     if (roleSelect.value === 'admin') {
+        // Hide username and password inputs
+        usernameInput.style.display = 'none';
+        passwordInput.style.display = 'none';
         adminCodeGroup.style.display = 'block';
     } else {
+        // Show username and password inputs
+        usernameInput.style.display = 'block';
+        passwordInput.style.display = 'block';
         adminCodeGroup.style.display = 'none';
     }
 });
 
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+loginForm.addEventListener('submit', function(event) {
     event.preventDefault();
-
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const role = document.getElementById('role').value;
-    const loginMessage = document.getElementById('loginMessage');
-
-    // List of valid user credentials
-    const validUsers = [
-        { username: 'user1', password: 'password1' },
-        { username: 'user2', password: 'password2' }
-    ];
-
-    // Admin credentials
-    const adminUniqueCode = 'pRGnS611';
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+    const role = roleSelect.value;
     const adminCodeInput = document.getElementById('adminCode').value;
 
     if (role === 'user') {
-        // User login validation
-        const user = validUsers.find(user => user.username === username);
-
-        if (!user) {
-            loginMessage.textContent = "Account does not exist, create new account";
-            loginMessage.style.color = "red";
-        } else if (user.password !== password) {
-            loginMessage.textContent = "Invalid login credentials";
-            loginMessage.style.color = "red";
-        } else {
-            // Redirect to user page
-            window.location.href = 'userpage.html';
-        }
+        handleUserLogin(username, password);
     } else if (role === 'admin') {
-        // Admin login validation
-        if (adminCodeInput !== adminUniqueCode) {
-            loginMessage.textContent = "Wrong unique code";
-            loginMessage.style.color = "red";
-        } else {
-            // Redirect to admin dashboard
-            window.location.href = 'admin_dashboard.html';
-        }
+        handleAdminLogin(adminCodeInput);
     }
 });
+
+function handleUserLogin(username, password) {
+    const user = validUsers.find(user => user.username === username);
+    if (!user) {
+        displayMessage("Account does not exist, create new account", "red");
+    } else if (user.password !== password) {
+        displayMessage("Invalid login credentials", "red");
+    } else {
+        window.location.href = 'userpage.html';
+    }
+}
+
+function handleAdminLogin(adminCodeInput) {
+    if (adminCodeInput !== adminUniqueCode) {
+        displayMessage("Wrong unique code", "red");
+    } else {
+        window.location.href = 'admin_dashboard.html';
+    }
+}
+
+function displayMessage(message, color) {
+    loginMessage.textContent = message;
+    loginMessage.style.color = color;
+    setTimeout(() => loginMessage.textContent = '', 3000); // Clear message after 3 seconds
+}
