@@ -67,3 +67,4 @@ function displayMessage(message, color) {
     loginMessage.style.color = color;
     setTimeout(() => loginMessage.textContent = '', 3000); // Clear message after 3 seconds
 }
+
