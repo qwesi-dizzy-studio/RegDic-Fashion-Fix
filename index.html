@@ -8,24 +8,12 @@
 </head>
 <body background="Background.png">
     <header align="center">
-        <img class="logo" src="logo1.png">
+        <img class="logo" src="logo1.png" alt="Logo">
     </header>
-    <br></br>
+    <br>
     <div class="login-container">
         <h2>Login</h2>
         <form id="loginForm">
-            <!-- Username Input -->
-            <div class="input-group" id="usernameGroup">
-                <label for="username">Username</label>
-                <input type="text" id="username" required>
-            </div>
-
-            <!-- Password Input -->
-            <div class="input-group">
-                <label for="password" id="passwordLabel">Password</label>
-                <input type="password" id="password" required>
-            </div>
-
             <!-- Role Selection (User/Admin) -->
             <div class="input-group">
                 <label for="role">Login as:</label>
@@ -33,6 +21,18 @@
                     <option value="user">User</option>
                     <option value="admin">Admin</option>
                 </select>
+            </div>
+
+            <!-- Username Input (Initially Visible) -->
+            <div class="input-group" id="usernameGroup">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+
+            <!-- Password Input (Initially Visible) -->
+            <div class="input-group">
+                <label for="password" id="passwordLabel">Password</label>
+                <input type="password" id="password" required>
             </div>
 
             <!-- Admin Unique Code Input (Initially Hidden) -->
@@ -46,9 +46,9 @@
         </form>
 
         <!-- Feedback Message -->
-        
         <p id="loginMessage"></p>
-          <!-- Add this section for the login link -->
+
+        <!-- Sign Up Link -->
         <p class="login-link">
             I'm a New Customer. <a href="signup.html">Sign Up Here</a>.
         </p>
@@ -58,4 +58,5 @@
     <script src="index.js"></script>
 </body>
 </html>
+
 
